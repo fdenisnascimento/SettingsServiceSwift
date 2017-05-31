@@ -1,0 +1,37 @@
+FROM ubuntu:14.04
+
+RUN apt-get update -y
+RUN apt-get install -y	git \
+vim \
+wget \
+openssl \
+libssl-dev \
+uuid-dev \
+clang \
+libicu-dev \
+libstdc++6-4.7-dev \
+libxml2 \
+libcurl3 \
+libcurl3-dev \
+libpq-dev \
+libxml2-dev \
+libxslt1-dev \
+python-dev \
+php5-curl \
+curl
+
+
+
+RUN apt-get update -y
+
+RUN wget https://swift.org/builds/swift-3.0.2-release/ubuntu1404/swift-3.0.2-RELEASE/swift-3.0.2-RELEASE-ubuntu14.04.tar.gz
+RUN tar -xvf swift-3.0.2-RELEASE-ubuntu14.04.tar.gz
+RUN mkdir -p /opt/swift/swift-3.0.2
+RUN mv swift-3.0.2-RELEASE-ubuntu14.04/usr /opt/swift/swift-3.0.2
+RUN rm -rf swift-3.0.2-RELEASE-ubuntu14.04
+RUN rm -rf swift-3.0.2-RELEASE-ubuntu14.04.tar.gz
+RUN mkdir /app
+RUN curl -sL toolbox.vapor.sh | bash
+
+
+ENV PATH=/opt/swift/swift-3.0.2/usr/bin/:"${PATH}"
